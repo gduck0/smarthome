@@ -182,7 +182,7 @@ int main(int argc, char** argv) {
     }
     printf("[main_controller] ✔ 메시지 큐 생성 완료 (즉시 사용 가능)\n");
 
-    // 하드웨어 초기화 (이제 시간이 걸려도 안전함)
+    // 메시지 큐 생성 후 하드웨어 초기화
     init_hardware();
 
     // vision_uploader의 PID 찾기 (최대 10초 대기 - launcher가 늦게 켜도 기다려줌)
@@ -482,7 +482,7 @@ void* thread_nfc(void* arg) {
             printf("\n");
         }
 
-        // 4️⃣ 태그 감지 판별 (단순 & 안정)
+        // 태그 감지 응답 확인
         for (int i = 0; i < len - 1; i++) {
             if (resp[i] == 0xD5 && resp[i + 1] == 0x4B) {
                 printf("\n✨ [NFC] 태그 감지 성공!\n");
